@@ -1,0 +1,5 @@
+Keras-Preprocessing==1.1.2
+matplotlib==3.2.2
+numpy==1.19.0
+pygame==1.9.6
+tensorflow==2.2.0
