@@ -1,5 +1,6 @@
 import tensorflow as tf
 from tensorflow import keras
+from keras import callbacks
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -7,8 +8,6 @@ import numpy as np
 X_train = X_train / 255
 X_train = np.around(X_train)
 X_train = X_train.astype(int)
-# for i in range(28):
-#     print(X_train[0][i])
 
 model = keras.Sequential([
     keras.layers.Flatten(input_shape=(28, 28)),
@@ -21,10 +20,16 @@ model.compile(optimizer='adam',
               loss='sparse_categorical_crossentropy',
               metrics=['accuracy'])
 
-model.fit(X_train, y_train, epochs=1)
-model.save("numpredictor/m.model")
+early_stopping = callbacks.EarlyStopping(
+    min_delta = 0.001,
+    patience = 5,
+    restore_best_weights = True
+)
 
-# ind=2
-# print(model.predict(np.expand_dims(X_train[ind],0)))
-# plt.imshow(X_train[ind], cmap=plt.cm.binary)
-# plt.show()
+model.fit(
+    X_train, y_train,
+    validation_data = (X_test, y_test),
+    epochs = 15,
+    callbacks = [early_stopping]
+)
+model.save("Random/numpredictor/m.model")
