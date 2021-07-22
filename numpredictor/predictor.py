@@ -32,4 +32,4 @@ model.fit(
     epochs = 15,
     callbacks = [early_stopping]
 )
-model.save("Random/numpredictor/m.model")
+model.save("Number-Predictor/numpredictor/m.model")
