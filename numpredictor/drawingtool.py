@@ -21,7 +21,7 @@ red = (255,0,0)
 green = (0,255,0)
 blue = (0,0,255)
 
-model = tf.keras.models.load_model("numpredictor/m.model")
+model = tf.keras.models.load_model("Number-Predictor/numpredictor/m.model")
 
 def draw():
     pos = pygame.mouse.get_pos()
@@ -51,10 +51,7 @@ while not done:
     clock.tick(FPS)
 
 results = model.predict(np.expand_dims(pixelArray,0))
+print(np.expand_dims(pixelArray,0).ndim)
 print(f"I predict the number is: {np.argmax(results)}")
-plt.imshow(pixelArray, cmap=plt.cm.binary)
-plt.show()
-# for i in pixelArray:
-#     print(*i)
 
 pygame.display.quit(), sys.exit()
